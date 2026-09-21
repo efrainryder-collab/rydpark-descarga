@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RYDPARK · Descarga</title>
+<meta name="description" content="Descarga RYDPARK, la app para asignar cajones de estacionamiento del site sin encierros.">
+<meta name="theme-color" content="#ce1126">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --rojo: #ce1126;
+    --fondo: #f7f6f4;
+    --superficie: #ffffff;
+    --texto: #1c1b1a;
+    --texto-suave: #5f5c58;
+    --borde: #e4e1dc;
+    --aviso-fondo: #fff6e5;
+    --aviso-borde: #f0c36d;
+    --acento-texto: #ce1126;
+    --radio: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #141312;
+      --superficie: #1f1d1c;
+      --texto: #f2f0ed;
+      --texto-suave: #aaa59f;
+      --borde: #34312e;
+      --aviso-fondo: #2e2616;
+      --aviso-borde: #7a5d1f;
+      --acento-texto: #ff6b7d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .contenedor { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+
+  .portada { background: var(--rojo); color: #fff; padding: 48px 0 56px; text-align: center; }
+  .icono {
+    width: 88px; height: 88px; margin: 0 auto 18px; border-radius: 22px;
+    background: #fff; color: var(--rojo);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 36px; letter-spacing: -1px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  }
+  .portada h1 { margin: 0; font-size: 34px; letter-spacing: 1px; }
+  .portada p.lema { margin: 6px 0 28px; font-size: 17px; opacity: .92; }
+  .boton {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #fff; color: var(--rojo);
+    font-weight: 700; font-size: 18px;
+    padding: 16px 30px; border-radius: 999px;
+    text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.2);
+    transition: transform .12s ease;
+  }
+  .boton:active { transform: scale(.97); }
+  .boton svg { width: 22px; height: 22px; }
+  .meta { margin-top: 14px; font-size: 14px; opacity: .85; }
+
+  section { padding: 36px 0 8px; }
+  h2 { font-size: 22px; margin: 0 0 16px; }
+  .tarjeta {
+    background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: var(--radio); padding: 18px 20px;
+  }
+
+  ol.pasos { list-style: none; padding: 0; margin: 0; counter-reset: paso; }
+  ol.pasos li {
+    counter-increment: paso; position: relative;
+    padding: 16px 18px 16px 62px;
+    background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: var(--radio); margin-bottom: 10px;
+  }
+  ol.pasos li::before {
+    content: counter(paso); position: absolute; left: 16px; top: 15px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--rojo); color: #fff; font-weight: 700; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.pasos strong { display: block; margin-bottom: 2px; }
+  ol.pasos span { color: var(--texto-suave); font-size: 15px; }
+
+  .aviso {
+    background: var(--aviso-fondo); border: 1px solid var(--aviso-borde);
+    border-radius: var(--radio); padding: 14px 18px; font-size: 15px; margin-top: 14px;
+  }
+
+  .rejilla { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 480px) { .rejilla { grid-template-columns: 1fr; } }
+  .rejilla h3 { margin: 0 0 4px; font-size: 16px; color: var(--acento-texto); }
+  .rejilla p { margin: 0; color: var(--texto-suave); font-size: 15px; }
+
+  details {
+    background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: var(--radio); margin-bottom: 10px; padding: 0 18px;
+  }
+  summary {
+    cursor: pointer; font-weight: 600; padding: 16px 0; list-style: none;
+    display: flex; justify-content: space-between; gap: 12px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--acento-texto); font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { margin: 0 0 16px; color: var(--texto-suave); font-size: 15px; }
+
+  footer { text-align: center; color: var(--texto-suave); font-size: 13px; padding: 36px 16px 48px; }
+</style>
+</head>
+<body>
+
+<header class="portada">
+  <div class="contenedor">
+    <div class="icono" aria-hidden="true">RP</div>
+    <h1>RYDPARK</h1>
+    <p class="lema">Tu cajón de estacionamiento, sin encierros.</p>
+    <a class="boton" id="descarga" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/>
+      </svg>
+      Descargar para Android
+    </a>
+    <div class="meta" id="version">Versión 1.0.0 · Android</div>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section>
+    <h2>Instalación</h2>
+    <ol class="pasos">
+      <li>
+        <strong>Descarga el archivo</strong>
+        <span>Abre esta página desde tu celular y toca «Descargar para Android». Se baja un archivo llamado <em>rydpark.apk</em>.</span>
+      </li>
+      <li>
+        <strong>Ábrelo desde tus descargas</strong>
+        <span>Toca la notificación de descarga o búscalo en la app «Archivos» → Descargas.</span>
+      </li>
+      <li>
+        <strong>Permite la instalación</strong>
+        <span>Android te pedirá permiso para instalar apps de este origen. Toca «Configuración», activa «Permitir de esta fuente» y regresa.</span>
+      </li>
+      <li>
+        <strong>Instala y abre RYDPARK</strong>
+        <span>Toca «Instalar». Al terminar, el ícono rojo con «RP» aparece en tu pantalla de inicio.</span>
+      </li>
+    </ol>
+    <div class="aviso">
+      <strong>¿Te sale un aviso de Play Protect?</strong> Es normal: la app no se distribuye por Play Store. Toca «Más detalles» y luego «Instalar de todos modos».
+    </div>
+  </section>
+
+  <section>
+    <h2>Primer uso</h2>
+    <ol class="pasos">
+      <li>
+        <strong>Regístrate</strong>
+        <span>Captura tu número de nómina y tus datos, y crea tu PIN de 6 dígitos.</span>
+      </li>
+      <li>
+        <strong>Espera la aprobación</strong>
+        <span>Tu alta queda pendiente hasta que un administrador la apruebe.</span>
+      </li>
+      <li>
+        <strong>Entra con nómina y PIN</strong>
+        <span>Con tu cuenta aprobada, inicia sesión y ya puedes hacer tu primer check-in.</span>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Cómo funciona</h2>
+    <div class="rejilla">
+      <div class="tarjeta">
+        <h3>Check-in</h3>
+        <p>Al llegar, elige tu turno y la app te asigna cajón. Se habilita desde 30 minutos antes de tu hora de entrada.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Saldré durante mi turno</h3>
+        <p>Márcalo si vas a sacar el auto a media jornada. Siempre te tocará un cajón con salida libre.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Necesito salir</h3>
+        <p>Si quedaste atrás y tienes que salir, avisa desde la app a la persona que está enfrente.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Check-out</h3>
+        <p>Al irte con tu auto, marca tu salida para liberar el cajón.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Estadía</h3>
+        <p>Si dejarás el auto más tiempo que tu turno, elige estadía al hacer check-in.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Visitas</h3>
+        <p>Solicita un lugar para tu visita con su nombre y placa. Un administrador lo aprueba.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preguntas frecuentes</h2>
+    <details>
+      <summary>¿Por qué no está en Play Store?</summary>
+      <p>Es una herramienta interna del site y se distribuye directamente a quien la usa.</p>
+    </details>
+    <details>
+      <summary>¿Cómo actualizo la app?</summary>
+      <p>Cuando haya versión nueva, vuelve a esta página y descárgala. Se instala encima de la anterior y conservas tu cuenta.</p>
+    </details>
+    <details>
+      <summary>Olvidé mi PIN</summary>
+      <p>Usa la opción de restablecer PIN dentro de la app o pide ayuda a un administrador.</p>
+    </details>
+    <details>
+      <summary>Mi cuenta dice «bloqueada»</summary>
+      <p>Se bloquea tras 5 intentos fallidos de PIN. Un administrador puede desbloquearla.</p>
+    </details>
+    <details>
+      <summary>No me deja hacer check-in</summary>
+      <p>El check-in se abre 30 minutos antes de tu hora de entrada y cierra al terminar tu turno. Revisa que elegiste el turno correcto.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>RYDPARK · Uso exclusivo del personal del site</footer>
+
+<script>
+  // ============================================================
+  // CONFIGURACIÓN — lo único que cambias
+  // ============================================================
+  var CONFIG = {
+    usuarioGitHub: "efrainryder-collab",
+    repositorio:   "rydpark-descarga",
+    version:       "1.0.0"
+  };
+  // ============================================================
+
+  // "releases/latest/download" siempre apunta al APK del release más
+  // reciente: al publicar versión nueva el botón no se toca.
+  document.getElementById("descarga").href =
+    "https://github.com/" + CONFIG.usuarioGitHub + "/" + CONFIG.repositorio +
+    "/releases/latest/download/rydpark.apk";
+  document.getElementById("version").textContent =
+    "Versión " + CONFIG.version + " · Android";
+</script>
+</body>
+</html>
